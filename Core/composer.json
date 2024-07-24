@@ -1,0 +1,16 @@
+{
+    "name": "tefo/core",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tefoh",
+            "email": "tefo.ha27@gmail.com"
+        }
+    ],
+    "require": {}
+}
