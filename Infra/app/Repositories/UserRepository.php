@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Core\Enums\RoleEnum;
 use Core\Repositories\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
@@ -17,5 +18,15 @@ class UserRepository implements UserRepositoryInterface
     public function createToken($user): string
     {
         return $user->createToken($user->role_id->toString())->plainTextToken;
+    }
+
+    public function getUserRole($user): RoleEnum
+    {
+        return $user->role_id;
+    }
+
+    public function getUserId($user): int
+    {
+        return $user->id;
     }
 }
