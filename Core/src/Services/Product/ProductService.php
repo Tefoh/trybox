@@ -18,6 +18,18 @@ class ProductService
     )
     { }
 
+    public function getProducts($user)
+    {
+        $userRole = $this->userRepository->getUserRole($user);
+        $userId = $this->userRepository->getUserId($user);
+
+        return match ($userRole) {
+            RoleEnum::CUSTOMER => $this->productRepository->getListOfCustomerProducts($userId),
+            RoleEnum::SELLER => $this->productRepository->getListOfSellerProducts($userId),
+            RoleEnum::ADMIN => $this->productRepository->getListOfProducts(),
+        };
+    }
+
     public function save(AddProductToStoreObject $addProductToStoreObject, $user, int $storeId)
     {
         $userRole = $this->userRepository->getUserRole($user);
