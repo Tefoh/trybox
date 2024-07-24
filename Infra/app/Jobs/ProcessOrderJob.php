@@ -34,6 +34,7 @@ class ProcessOrderJob implements ShouldQueue
             route('webhook.product.buy'),
             [
                 'transaction_num' => $this->transactionNumber,
+                'has_paid' => !! rand(0, 1)
             ]
         );
     }
