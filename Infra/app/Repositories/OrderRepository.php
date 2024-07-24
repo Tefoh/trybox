@@ -24,4 +24,16 @@ class OrderRepository implements OrderRepositoryInterface
             ->create($data)
             ->toArray();
     }
+
+    public function processOrder($orderId, $hasPaid)
+    {
+        $order = Order::query()
+            ->find($orderId);
+
+        $order->update([
+            'status' => $hasPaid ? OrderStatusEnum::PAID : OrderStatusEnum::FAILED
+        ]);
+
+        return $order->fresh()->toArray();
+    }
 }
