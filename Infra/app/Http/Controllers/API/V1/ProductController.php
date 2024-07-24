@@ -7,6 +7,7 @@ use App\Http\Requests\API\V1\ProductRequest;
 use App\Models\Store;
 use Core\Services\Product\ProductService;
 use Core\ValueObjects\Store\AddProductToStoreObject;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -14,6 +15,11 @@ class ProductController extends Controller
         private readonly ProductService $productService
     )
     { }
+
+    public function index(Request $request)
+    {
+        return $this->productService->getProducts($request->user());
+    }
 
     public function store(ProductRequest $request, Store $store)
     {

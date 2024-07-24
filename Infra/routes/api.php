@@ -10,4 +10,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/seller', [\App\Http\Controllers\API\V1\SellerController::class, 'store'])->name('seller.store');
 
     Route::post('/store/{store}/product', [\App\Http\Controllers\API\V1\ProductController::class, 'store'])->name('store.add-product');
+
+    Route::get('products', [\App\Http\Controllers\API\V1\ProductController::class, 'index'])->name('product.index');
 });
