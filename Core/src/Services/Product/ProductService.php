@@ -70,4 +70,16 @@ class ProductService
             $transaction, $transactionNumber
         );
     }
+
+    public function checkTransactionNumberExists($transactionNum): bool
+    {
+        return $this->transactionRepository->transactionNumberExists($transactionNum);
+    }
+
+    public function processTransactionAndOrder($transactionNum, $hasPaid)
+    {
+        $transaction = $this->transactionRepository->markTransactionAsDone($transactionNum);
+
+        return $this->orderRepository->processOrder($transaction['order_id'], $hasPaid);
+    }
 }
