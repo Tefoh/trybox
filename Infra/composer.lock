@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e8c3c14ff33b199b4a0838993eb8423",
+    "content-hash": "a3f8882ec71e2a4aba031bac246987e7",
     "packages": [
         {
             "name": "brick/math",
@@ -5409,6 +5409,30 @@
             "time": "2024-06-28T08:00:31+00:00"
         },
         {
+            "name": "tefo/core",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../Core",
+                "reference": "b6fbdaf7ca9c7b8c9aeb332ff01a05161ab77832"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Core\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Tefoh",
+                    "email": "tefo.ha27@gmail.com"
+                }
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "v2.2.7",
             "source": {
@@ -7820,7 +7844,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
