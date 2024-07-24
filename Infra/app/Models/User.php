@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Core\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -42,6 +45,27 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role_id' => RoleEnum::class,
         ];
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->role_id === RoleEnum::CUSTOMER;
+    }
+
+    public function isSeller(): bool
+    {
+        return $this->role_id === RoleEnum::SELLER;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role_id === RoleEnum::ADMIN;
     }
 }
