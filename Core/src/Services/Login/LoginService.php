@@ -2,7 +2,6 @@
 
 namespace Core\Services\Login;
 
-use App\Models\User;
 use Core\Exceptions\InvalidPasswordException;
 use Core\Exceptions\LoginRequestUserNotFoundException;
 use Core\Repositories\UserRepositoryInterface;
@@ -20,7 +19,7 @@ class LoginService
      * @throws LoginRequestUserNotFoundException
      * @throws InvalidPasswordException
      */
-    public function loginUser(LoginObject $loginObject): User
+    public function loginUser(LoginObject $loginObject)
     {
         $credentials = $loginObject->credentials();
 
@@ -39,5 +38,10 @@ class LoginService
         }
 
         return $user;
+    }
+
+    public function createToken($user): string
+    {
+        return $this->userRepository->createToken($user);
     }
 }

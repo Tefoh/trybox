@@ -27,7 +27,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'data' => [
-                    'token' => $user->createToken($user->role_id->toString())->plainTextToken
+                    'token' => $this->loginService->createToken($user)
                 ]
             ]);
         } catch (LoginRequestUserNotFoundException|InvalidPasswordException $e) {

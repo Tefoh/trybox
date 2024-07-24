@@ -13,4 +13,9 @@ class UserRepository implements UserRepositoryInterface
             ->where('email', $email)
             ->first();
     }
+
+    public function createToken($user): string
+    {
+        return $user->createToken($user->role_id->toString())->plainTextToken;
+    }
 }
