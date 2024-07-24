@@ -8,7 +8,7 @@ use Core\Repositories\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function findByEmail(string $email): User|null
+    public function findByEmail(string $email)
     {
         return User::query()
             ->where('email', $email)
@@ -28,5 +28,11 @@ class UserRepository implements UserRepositoryInterface
     public function getUserId($user): int
     {
         return $user->id;
+    }
+
+    public function store(array $data)
+    {
+        return User::query()
+            ->create($data);
     }
 }

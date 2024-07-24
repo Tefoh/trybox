@@ -6,4 +6,6 @@ Route::post('/login', \App\Http\Controllers\API\V1\LoginController::class)->name
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/customer-address', [\App\Http\Controllers\API\V1\CustomerAddressController::class, 'store'])->name('address-customer.store');
+
+    Route::post('/seller', [\App\Http\Controllers\API\V1\SellerController::class, 'store'])->name('seller.store');
 });
