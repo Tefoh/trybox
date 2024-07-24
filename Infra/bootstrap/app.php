@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,7 +15,11 @@ $app = Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (\Core\Exceptions\ForbiddenException $exception, Request $request) {
+            return response()->json([
+                'message' => 'You dont have access to this resource!'
+            ], 403);
+        });
     })->create();
 
 $app->useDatabasePath(__DIR__ . '/../../database');
