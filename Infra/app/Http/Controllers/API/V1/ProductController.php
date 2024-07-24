@@ -13,6 +13,7 @@ use Core\ValueObjects\Products\BuyProductObject;
 use Core\ValueObjects\Store\AddProductToStoreObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
@@ -54,5 +55,20 @@ class ProductController extends Controller
         return $this->productService->updateTheTransactionNumber(
             $transaction, $transactionNumber
         );
+    }
+
+    public function webhook(Request $request)
+    {
+        $data = $request->toArray();
+        if (
+            !$data['transaction_num']
+            || ! isset($data['has_paid'])
+            || ! $this->productService->checkTransactionNumberExists($data['transaction_num'])
+        ) {
+            throw new NotFoundHttpException();
+        }
+        $this->productService->processTransactionAndOrder($data['transaction_num'], $data['has_paid']);
+
+        return response()->json([], 200);
     }
 }

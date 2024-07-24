@@ -15,5 +15,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/products/{product}/buy', [\App\Http\Controllers\API\V1\ProductController::class, 'buy'])->name('products-product.buy');
 
-    Route::get('/webhook/product/buy', [\App\Http\Controllers\API\V1\ProductController::class])->name('webhook.product.buy');
+    Route::get('/webhook/product/buy', [\App\Http\Controllers\API\V1\ProductController::class, 'webhook'])->name('webhook.product.buy');
 });
